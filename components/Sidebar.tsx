@@ -73,7 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs = [] }) => {
           Playlist functionality in a future update. Stay tuned.
         </Box>
       </div>
-      <main className="h-full w-full flex pt-2 pb-3 overflow-y-auto">{children}</main>
+      <main className="h-full w-full flex pt-2 pb-1 overflow-y-auto">{children}</main>
     </div>
   );
 };
