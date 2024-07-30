@@ -34,9 +34,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave;
 
   const onPlayNext = useCallback(() => {
-    if (player.ids.length === 0) {
-      return;
-    }
+    if (player.ids.length === 0) return;
 
     let nextSongId;
     if (isShuffle) {
@@ -51,9 +49,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   }, [player, isShuffle]);
 
   const onPlayPrevious = useCallback(() => {
-    if (player.ids.length === 0) {
-      return;
-    }
+    if (player.ids.length === 0) return;
 
     const currentIndex = player.ids.findIndex((id) => id === player.activeId);
     const previousSongId = player.ids[(currentIndex - 1 + player.ids.length) % player.ids.length];
@@ -74,7 +70,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   };
 
   const toggleMute = () => {
-    setVolume(volume === 0 ? 1 : 0);
+    setVolume((prevVolume) => (prevVolume === 0 ? 1 : 0));
     if (audioRef.current) {
       audioRef.current.volume = volume === 0 ? 1 : 0;
     }
@@ -87,14 +83,13 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   };
 
   const handlePlayPause = () => {
-    const audioElement = audioRef.current;
-    if (!audioElement) return;
+    if (!audioRef.current) return;
 
-    if (audioElement.paused) {
-      audioElement.play();
+    if (audioRef.current.paused) {
+      audioRef.current.play();
       setIsPlaying(true);
     } else {
-      audioElement.pause();
+      audioRef.current.pause();
       setIsPlaying(false);
     }
   };
@@ -111,51 +106,48 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   };
 
   useEffect(() => {
-    const audioElement = audioRef.current;
-    if (!audioElement) return;
+    if (!audioRef.current) return;
 
     const handleLoadedMetadata = () => {
-      setDuration(audioElement.duration);
-      audioElement.play(); 
+      setDuration(audioRef.current!.duration);
+      audioRef.current!.play();
       setIsPlaying(true);
     };
 
     const handleTimeUpdate = () => {
-      setCurrentTime(audioElement.currentTime);
+      setCurrentTime(audioRef.current!.currentTime);
     };
 
     const handleEnded = () => {
       if (isRepeat) {
-        audioElement.currentTime = 0;
-        audioElement.play();
+        audioRef.current!.currentTime = 0;
+        audioRef.current!.play();
       } else {
         setIsPlaying(false);
         onPlayNext();
       }
     };
 
-    audioElement.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audioElement.addEventListener('timeupdate', handleTimeUpdate);
-    audioElement.addEventListener('ended', handleEnded);
+    audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+    audioRef.current.addEventListener('ended', handleEnded);
 
     return () => {
-      audioElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audioElement.removeEventListener('timeupdate', handleTimeUpdate);
-      audioElement.removeEventListener('ended', handleEnded);
+      audioRef.current?.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audioRef.current?.removeEventListener('timeupdate', handleTimeUpdate);
+      audioRef.current?.removeEventListener('ended', handleEnded);
     };
-  }, [audioRef, onPlayNext, isRepeat]);
+  }, [onPlayNext, isRepeat]);
 
   useEffect(() => {
-    const audioElement = audioRef.current;
-    if (!audioElement) return;
-
-    audioElement.volume = volume;
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
   }, [volume]);
 
   useEffect(() => {
-    const audioElement = audioRef.current;
-    if (audioElement && isPlaying) {
-      audioElement.play();
+    if (audioRef.current && isPlaying) {
+      audioRef.current.play();
     }
   }, [songUrl, isPlaying]);
 
@@ -292,4 +284,3 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 };
 
 export default PlayerContent;
-
