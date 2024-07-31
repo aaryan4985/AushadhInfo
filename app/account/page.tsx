@@ -38,7 +38,7 @@ const AccountsPage = () => {
           <div className="mt-4 px-6">
             <div className="
               grid
-              grid-cols-2
+              grid-cols-1
               sm:grid-cols-3
               xl:grid-cols-4
               2xl:grid-cols-6
