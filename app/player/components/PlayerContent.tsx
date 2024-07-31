@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import { AiFillStepBackward, AiFillStepForward } from 'react-icons/ai';
@@ -34,7 +35,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave;
 
   const onPlayNext = useCallback(() => {
-    if (player.ids.length === 0) return;
+    if (player.ids.length === 0) {
+      return;
+    }
 
     let nextSongId;
     if (isShuffle) {
@@ -49,7 +52,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   }, [player, isShuffle]);
 
   const onPlayPrevious = useCallback(() => {
-    if (player.ids.length === 0) return;
+    if (player.ids.length === 0) {
+      return;
+    }
 
     const currentIndex = player.ids.findIndex((id) => id === player.activeId);
     const previousSongId = player.ids[(currentIndex - 1 + player.ids.length) % player.ids.length];
@@ -70,7 +75,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   };
 
   const toggleMute = () => {
-    setVolume((prevVolume) => (prevVolume === 0 ? 1 : 0));
+    setVolume(volume === 0 ? 1 : 0);
     if (audioRef.current) {
       audioRef.current.volume = volume === 0 ? 1 : 0;
     }
@@ -83,13 +88,14 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   };
 
   const handlePlayPause = () => {
-    if (!audioRef.current) return;
+    const audioElement = audioRef.current;
+    if (!audioElement) return;
 
-    if (audioRef.current.paused) {
-      audioRef.current.play();
+    if (audioElement.paused) {
+      audioElement.play();
       setIsPlaying(true);
     } else {
-      audioRef.current.pause();
+      audioElement.pause();
       setIsPlaying(false);
     }
   };
@@ -106,48 +112,51 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   };
 
   useEffect(() => {
-    if (!audioRef.current) return;
+    const audioElement = audioRef.current;
+    if (!audioElement) return;
 
     const handleLoadedMetadata = () => {
-      setDuration(audioRef.current!.duration);
-      audioRef.current!.play();
+      setDuration(audioElement.duration);
+      audioElement.play(); 
       setIsPlaying(true);
     };
 
     const handleTimeUpdate = () => {
-      setCurrentTime(audioRef.current!.currentTime);
+      setCurrentTime(audioElement.currentTime);
     };
 
     const handleEnded = () => {
       if (isRepeat) {
-        audioRef.current!.currentTime = 0;
-        audioRef.current!.play();
+        audioElement.currentTime = 0;
+        audioElement.play();
       } else {
         setIsPlaying(false);
         onPlayNext();
       }
     };
 
-    audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
-    audioRef.current.addEventListener('ended', handleEnded);
+    audioElement.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audioElement.addEventListener('timeupdate', handleTimeUpdate);
+    audioElement.addEventListener('ended', handleEnded);
 
     return () => {
-      audioRef.current?.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audioRef.current?.removeEventListener('timeupdate', handleTimeUpdate);
-      audioRef.current?.removeEventListener('ended', handleEnded);
+      audioElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audioElement.removeEventListener('timeupdate', handleTimeUpdate);
+      audioElement.removeEventListener('ended', handleEnded);
     };
-  }, [onPlayNext, isRepeat]);
+  }, [audioRef, onPlayNext, isRepeat]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
+    const audioElement = audioRef.current;
+    if (!audioElement) return;
+
+    audioElement.volume = volume;
   }, [volume]);
 
   useEffect(() => {
-    if (audioRef.current && isPlaying) {
-      audioRef.current.play();
+    const audioElement = audioRef.current;
+    if (audioElement && isPlaying) {
+      audioElement.play();
     }
   }, [songUrl, isPlaying]);
 
