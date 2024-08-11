@@ -11,7 +11,6 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@/hooks/useUser";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { FaUserAlt } from "react-icons/fa";
 import useLoadAvatar from "@/hooks/useLoadAvatar";
 import { UserDetails } from "@/types";
 
@@ -68,7 +67,6 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
         if (error) {
           toast.error(error.message);
         } else {
-          // Ensure data matches UserDetails
           const userDetails: UserDetails = {
             id: data?.id || "",
             first_name: data?.first_name,
@@ -142,7 +140,11 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                     className="h-10 w-10 rounded-full"
                   />
                 ) : (
-                  <FaUserAlt />
+                  <img
+                    src="/images/default-avatar.png"
+                    alt="Default Avatar"
+                    className="h-10 w-10 rounded-full"
+                  />
                 )}
               </Button>
             </div>
