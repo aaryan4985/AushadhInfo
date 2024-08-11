@@ -27,6 +27,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const [bgColor, setBgColor] = useState<string>("");
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const avatarUrl = useLoadAvatar(userDetails);
+  const [currentAvatarUrl, setCurrentAvatarUrl] = useState<string>("/images/default-avatar.png");
 
   const colors = [
     ["from-red-700", "to-yellow-700"],
@@ -84,6 +85,12 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
     fetchUserProfile();
   }, [user, supabaseClient]);
 
+  useEffect(() => {
+    if (avatarUrl) {
+      setCurrentAvatarUrl(avatarUrl);
+    }
+  }, [avatarUrl]);
+
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
     router.refresh();
@@ -134,9 +141,10 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
               </Button>
               <Button onClick={() => router.push("/account")} className="bg-transparent px-2 pt-2 pb-1 rounded-full">
                 <img
-                  src={avatarUrl || "/images/default-avatar.png"}
+                  src={currentAvatarUrl}
                   alt="User Avatar"
                   className="h-10 w-10 rounded-full"
+                  onError={() => setCurrentAvatarUrl("/images/default-avatar.png")}
                 />
               </Button>
             </div>
