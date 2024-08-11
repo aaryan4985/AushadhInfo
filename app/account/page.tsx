@@ -19,7 +19,7 @@ const AccountsPage = () => {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     alt="Account"
                     className="object-cover rounded-full"
-                    src="/images/accounts.avif"
+                    src="/images/accounts.png"
                   />
                 </div>
                 <div className="flex flex-col gap-y-2 mt-0 md:mt-0">
