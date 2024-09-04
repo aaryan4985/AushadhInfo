@@ -37,27 +37,28 @@ const ListItem: React.FC<ListItemProps> = ({
                 rounded-md
                 overflow-hidden
                 gap-x-1
-                bg-neutral-200/20
+                bg-transparent
                 hover:bg-neutral-600/35
                 transition
-                pr-1
+                p-1
                 cursor-pointer
             "
         >
             <div className="
                 relative
-                min-h-[64px]
-                min-w-[64px]
+                min-h-[50px]
+                min-w-[50px]
             ">
                 <Image
-                    className="object-cover"
+                    className="object-cover rounded-full"
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 700px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     src={image}
                     alt="Image"
+                    
                 />
             </div>
-            <p className="font-medium truncate py-5">
+            <p className="font-medium ml-2 truncate py-3">
                 {name}
             </p>
         </div>

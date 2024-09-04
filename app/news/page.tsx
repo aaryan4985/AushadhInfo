@@ -1,7 +1,6 @@
 import Header from '@/components/Header';
 import Box from '@/components/Box';
-import General from './components/General';
-import Conditions from './components/Conditions';
+import News from './components/News';
 
 export const revalidate = 0;
 
@@ -12,11 +11,8 @@ export default async function Home() {
         <Header children={undefined} />
       </Box>
       <Box className="bg-white h-[calc(100%-75px)]">
-        <div className="mt-2 h-full grid grid-cols-2 gap-2">
-          <div className="flex flex-col overflow-y-auto gap-2">
-            <General />
-            <Conditions />            
-          </div>
+        <div>
+            <News/>
         </div>
       </Box>
     </div>

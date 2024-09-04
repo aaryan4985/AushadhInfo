@@ -11,7 +11,7 @@ const LibraryPage = async () => {
 
     return (
         <div className="
-            bg-neutral-900
+            bg-white
             rounded-lg
             h-full
             w-full
@@ -23,7 +23,7 @@ const LibraryPage = async () => {
                 flex
                 flex-col
                 gap-y-2
-                bg-black
+                bg-white
                 h-full
             ">
                 <Box>

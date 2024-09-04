@@ -23,7 +23,7 @@ const Liked = async () => {
           flex
           flex-col
           gap-y-2
-          bg-black
+          bg-white
           h-full
         "
       >

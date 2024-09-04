@@ -94,7 +94,7 @@ const AccountsContent = () => {
   };
 
   return (
-    <div className="bg-neutral-900 p-6 rounded-lg shadow-md">
+    <div className="bg-blue-800 p-6 rounded-lg shadow-md">
       {isNewUser ? (
         <DetailsForm
           firstName={firstName}

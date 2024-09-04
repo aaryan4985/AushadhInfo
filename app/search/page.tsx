@@ -18,7 +18,7 @@ const Search = async ({ searchParams }: SearchProps) => {
 
     return (
         <div className="
-            bg-neutral-900
+            bg-white
             rounded-lg
             h-full
             w-full
@@ -30,7 +30,7 @@ const Search = async ({ searchParams }: SearchProps) => {
                 flex
                 flex-col
                 gap-y-2
-                bg-black
+                bg-white
                 h-full
             ">
                 <Box>
