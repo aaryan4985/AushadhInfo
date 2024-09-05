@@ -6,14 +6,14 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Input from "./Input";
 
-const SearchInput = () => {
+const MedicinesInput = () => {
     const router = useRouter();
     const [query, setQuery] = useState<string>("");
     const debouncedQuery = useDebounce<string>(query, 500);
 
     useEffect(() => {
         const url = qs.stringifyUrl({
-            url: '/search',
+            url: '/medicines',
             query: { query: debouncedQuery }
         });
         router.push(url);
@@ -28,4 +28,4 @@ const SearchInput = () => {
     );
 };
 
-export default SearchInput;
+export default MedicinesInput;

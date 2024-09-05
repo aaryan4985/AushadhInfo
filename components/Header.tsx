@@ -71,45 +71,29 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   };
 
   return (
-    <div className={twMerge("bg-black px-4 py-2 rounded-lg w-full h-full", className)}>
+    <div className={twMerge("bg-white px-4 py-2 rounded-lg w-full h-full", className)}>
       <div className="w-full flex items-center justify-between">
  
-        <div className="hidden md:flex gap-x-0 items-center">
+        <div className="hidden rounded-full md:flex gap-x-2 items-center">
           <button
             onClick={() => router.back()}
-            className="rounded-full bg-transparent flex items-center justify-center hover:opacity-75 transition"
+            className="rounded-full bg-gradient-to-r hover:bg-gray-200 from-teal-500 to-blue-500 flex items-center justify-center hover:opacity-75 transition"
           >
-            <RxCaretLeft className="text-white" size={50} />
+            <RxCaretLeft className="text-black" size={50} />
           </button>
           <button
             onClick={() => router.forward()}
-            className="rounded-full bg-transparent flex items-center justify-center hover:opacity-75 transition"
+            className="rounded-full bg-gradient-to-r from-teal-500 to-blue-500 hover:bg-gray-200 flex items-center justify-center hover:opacity-75 transition"
           >
-            <RxCaretRight className="text-white" size={50} />
+            <RxCaretRight className="text-black" size={50} />
           </button>
         </div>
-
-        <div className="flex items-center gap-x-2 justify-center flex-grow mx-2">
-          <button
-            onClick={() => router.push("/")}
-            className="rounded-full bg-white p-2 flex items-center justify-center hover:opacity-75 transition md:hidden"
-          >
-            <HiHome className="text-black" size={20} />
-          </button>
-          <div className="w-full md:w-3/4 lg:w-4/5">
-            <Input
-              placeholder="Search..."
-              className="w-full bg-neutral-300/50 text-black py-2 px-4 rounded-lg"
-            />
-          </div>
-        </div>
-
-        <div className="flex items-center gap-x-2 md:gap-x-2">
+        <div className="flex items-center bg-gradient-to-r from-teal-500 to-blue-500 hover:bg-gray-200 px-2 py-2 rounded-full  gap-x-2 md:gap-x-2">
           {user ? (
             <div className="flex items-center gap-x-2">
               <Button
                 onClick={handleLogout}
-                className="bg-white px-2 py-2 text-black rounded-full"
+                className="bg-white text-black hover:bg-gray-100 rounded-full"
               >
                 Logout
               </Button>

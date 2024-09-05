@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { Medicine} from '@/types';
-import Table from '@/components/Table';
+import Table from './Table';
 
-interface SearchContentProps {
+interface MedicinesContentProps {
     medicines: Medicine[];
 }
 
-const SearchContent: React.FC<SearchContentProps> = ({ medicines }) => {
+const MedicinesContent: React.FC<MedicinesContentProps> = ({ medicines }) => {
 
     if (medicines.length === 0) {
         return (
@@ -23,4 +23,4 @@ const SearchContent: React.FC<SearchContentProps> = ({ medicines }) => {
     );
 };
 
-export default SearchContent;
+export default MedicinesContent;

@@ -12,12 +12,14 @@ export default async function Home() {
         <Header children={undefined} />
       </Box>
       <Box className="bg-white h-[calc(100%-75px)]">
-        <div className="mt-2 h-full grid grid-cols-2 gap-2">
-          <div className="flex flex-col overflow-y-auto gap-2">
-            <General />
-            <Conditions />            
-          </div>
-        </div>
+          <div className="flex h-full overflow-y-auto pt-3 flex-col gap-y-2">
+            <div className='h-full'>
+              <General />
+            </div>
+            <div className='h-full'>
+              <Conditions />
+            </div>
+          </div>            
       </Box>
     </div>
   );

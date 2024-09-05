@@ -50,7 +50,7 @@ const ListItem: React.FC<ListItemProps> = ({
                 min-w-[50px]
             ">
                 <Image
-                    className="object-cover rounded-full"
+                    className="object-cover border-y-2 border-x-2 border-black rounded-full"
                     fill
                     sizes="(max-width: 700px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     src={image}
@@ -58,7 +58,7 @@ const ListItem: React.FC<ListItemProps> = ({
                     
                 />
             </div>
-            <p className="font-medium ml-2 truncate py-3">
+            <p className="font-bold text-black ml-2 truncate py-3">
                 {name}
             </p>
         </div>
