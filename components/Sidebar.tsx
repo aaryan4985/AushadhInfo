@@ -64,7 +64,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             <ListItem
               icon={faClockFour}
               name="Tracking"
-              href="artist"
+              href="tracking"
             /> 
             <ListItem
                 icon={faPills} 
